@@ -53,10 +53,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if hitResults.count > 0 {
             let node = hitResults[0].node
             //make sure node is a note and not a marker
-            node.removeFromParentNode()
             progress = progress + 1
             let message = String(progress) + " of 8 notes collected."
             animateNotification(message: message)
+            grab(node)
         }
     }
     @objc func timer(){
@@ -100,16 +100,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Release any cached data, images, etc that aren't in use.
     }
     
-    // MARK: - ARSCNViewDelegate
-    
-    /*
-     // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-     let node = SCNNode()
-     
-     return node
-     }
-     */
+    func grab(_ node: SCNNode) {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.5
+            node.position = self.sceneView.pointOfView!.position
+            SCNTransaction.completionBlock = {
+                node.removeFromParentNode()
+            }
+            SCNTransaction.commit()
+
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
