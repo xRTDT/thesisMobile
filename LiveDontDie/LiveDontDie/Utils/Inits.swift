@@ -11,6 +11,7 @@ import SceneKit
 import ARKit
 
 class Init {
+    
     class func initMarkers(scene: SCNScene) -> Array<SCNNode> {
         var markers: Array<SCNNode> = []
         for index in 1...8 {
@@ -35,10 +36,7 @@ class Init {
         return markers
     }
     
-    class func initMonster(sceneView: ARSCNView, scene: SCNScene) -> SCNNode {
-        
-        //change range to make playing area bigger/smaller
-        let range = 30.0
+    class func initMonster(sceneView: ARSCNView, scene: SCNScene, range: Double) -> SCNNode {
         let current = sceneView.pointOfView!.position
 
         let obj = SCNScene(named: "../art.scnassets/ship.scn")
