@@ -14,6 +14,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var progress: Int = 0
     var markers: Array<SCNNode>?
     var monster: SCNNode?
+    var monsterRange: Double = 30
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var progressLabel: UILabel!
     
@@ -46,7 +47,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //timer to instantiate monster
         
         func monsterTimer(){
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
         }
         
         scheduledTimerWithTimeInterval()
@@ -75,7 +76,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func monsterTimer(){
-        monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene)
+        monsterRange = monsterRange - 0.5
+        monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene, range: monsterRange)
     }
     
     func animateNotification(message: String) {
