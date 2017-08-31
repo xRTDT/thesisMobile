@@ -35,6 +35,27 @@ class Init {
         return markers
     }
     
+    class func initMonster(sceneView: ARSCNView, scene: SCNScene) -> SCNNode {
+            //change range to make playing area bigger/smaller
+        let range = 30.0
+        let current = sceneView.pointOfView!.position
+
+        let obj = SCNScene(named: "../art.scnassets/ship.scn")
+        let monster = obj?.rootNode.childNode(withName: "ship", recursively: true)!
+        monster?.scale = SCNVector3Make(1, 1, 1)
+        monster?.position = SCNVector3Make(current.x, current.y-2, current.z)
+        monster?.name = "Monster"
+        
+        let xPos = Float((drand48() - 0.5) * range)
+        let zPos = Float((drand48() - 0.5) * range)
+        monster?.position = SCNVector3Make(xPos, 0, zPos)
+        
+        sceneView.scene.rootNode.addChildNode(monster!)
+        scene.rootNode.addChildNode(monster!)
+        
+        return monster!
+    }
+    
     class func calculateDistances(sceneView: ARSCNView, markers:Array<SCNNode>) -> Bool {
         let current = sceneView.pointOfView!.position
         for node in markers {
