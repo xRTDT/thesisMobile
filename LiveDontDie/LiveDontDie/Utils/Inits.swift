@@ -36,7 +36,8 @@ class Init {
     }
     
     class func initMonster(sceneView: ARSCNView, scene: SCNScene) -> SCNNode {
-            //change range to make playing area bigger/smaller
+        
+        //change range to make playing area bigger/smaller
         let range = 30.0
         let current = sceneView.pointOfView!.position
 
@@ -52,6 +53,10 @@ class Init {
         
         sceneView.scene.rootNode.addChildNode(monster!)
         scene.rootNode.addChildNode(monster!)
+        
+        // Forces monster to be facing you at all times
+        let targetNode = SCNLookAtConstraint(target: sceneView.pointOfView)
+        monster?.constraints = [targetNode]
         
         return monster!
     }
