@@ -25,15 +25,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Create a new scene
+        // Create a new scene and initialize markers
         let scene = SCNScene(named: "art.scnassets/main.scn")!
         markers = Init.initMarkers(scene: scene)
-        print(markers!)
-        monster = Init.initMonster(sceneView: sceneView, scene: scene)
-        
-        // Forces monster to be facing you at all times
-        let targetNode = SCNLookAtConstraint(target: sceneView.pointOfView)
-        monster?.constraints = [targetNode]
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -43,11 +37,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         var timer = Timer()
         
+        //timer to calculate distance
+        
         func scheduledTimerWithTimeInterval(){
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timer), userInfo: nil, repeats: true)
         }
         
+        //timer to instantiate monster
+        
+        func monsterTimer(){
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
+        }
+        
         scheduledTimerWithTimeInterval()
+        monsterTimer()
     }
     
     @objc func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
@@ -63,11 +66,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             grab(node)
         }
     }
+    
     @objc func timer(){
         let close = Init.calculateDistances(sceneView: sceneView, markers: markers!)
         if close {
             animateNotification(message: "A note has appeared")
         }
+    }
+    
+    @objc func monsterTimer(){
+        monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene)
     }
     
     func animateNotification(message: String) {
@@ -80,6 +88,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.progressLabel.alpha = 0.0
             })
         })
+    }
+    
+    func grab(_ node: SCNNode) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.5
+        node.position = self.sceneView.pointOfView!.position
+        SCNTransaction.completionBlock = {
+            node.removeFromParentNode()
+        }
+        SCNTransaction.commit()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,17 +121,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
-    }
-    
-    func grab(_ node: SCNNode) {
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
-            node.position = self.sceneView.pointOfView!.position
-            SCNTransaction.completionBlock = {
-                node.removeFromParentNode()
-            }
-            SCNTransaction.commit()
-
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
