@@ -52,9 +52,9 @@
 			children = (
 				27F176D01F5783B400284659 /* Utils */,
 				2734000B1F57775B005E481B /* AppDelegate.swift */,
-				2734000D1F57775B005E481B /* art.scnassets */,
 				2734000F1F57775B005E481B /* ViewController.swift */,
 				273400111F57775B005E481B /* Main.storyboard */,
+				2734000D1F57775B005E481B /* art.scnassets */,
 				273400141F57775B005E481B /* Assets.xcassets */,
 				273400161F57775B005E481B /* LaunchScreen.storyboard */,
 				273400191F57775B005E481B /* Info.plist */,

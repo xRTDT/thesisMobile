@@ -31,6 +31,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         print(markers!)
         monster = Init.initMonster(sceneView: sceneView, scene: scene)
         
+        // Forces monster to be facing you at all times
+        let targetNode = SCNLookAtConstraint(target: sceneView.pointOfView)
+        monster?.constraints = [targetNode]
+        
         // Set the scene to the view
         sceneView.scene = scene
         
