@@ -77,6 +77,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func monsterTimer(){
         monsterRange = monsterRange - 0.5
+        //if there's already a monster, delete him first
+        monster?.removeFromParentNode()
         monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene, range: monsterRange)
     }
     
