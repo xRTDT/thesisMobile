@@ -14,6 +14,9 @@
 		273400151F57775B005E481B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273400141F57775B005E481B /* Assets.xcassets */; };
 		273400181F57775B005E481B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273400161F57775B005E481B /* LaunchScreen.storyboard */; };
 		27F176D21F5783C600284659 /* Inits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F176D11F5783C600284659 /* Inits.swift */; };
+		65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */; };
+		65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */; };
+		65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */; };
 		9BA5EE5FFBBB8D9D726FBBDD /* libPods-LiveDontDie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 583E058DBC48A3B9A4EE8729 /* libPods-LiveDontDie.a */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,9 @@
 		27F176D11F5783C600284659 /* Inits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inits.swift; sourceTree = "<group>"; };
 		583E058DBC48A3B9A4EE8729 /* libPods-LiveDontDie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveDontDie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6387580DC5A1590943D1B2B8 /* Pods-LiveDontDie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.release.xcconfig"; sourceTree = "<group>"; };
+		65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		B6F2D6DDBA966F4430FE8B20 /* Pods-LiveDontDie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,10 +65,13 @@
 				2734000B1F57775B005E481B /* AppDelegate.swift */,
 				2734000F1F57775B005E481B /* ViewController.swift */,
 				273400111F57775B005E481B /* Main.storyboard */,
+				65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */,
+				65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */,
 				2734000D1F57775B005E481B /* art.scnassets */,
 				273400141F57775B005E481B /* Assets.xcassets */,
 				273400161F57775B005E481B /* LaunchScreen.storyboard */,
 				273400191F57775B005E481B /* Info.plist */,
+				65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */,
 			);
 			path = LiveDontDie;
 			sourceTree = "<group>";
@@ -166,6 +175,7 @@
 			files = (
 				2734000E1F57775B005E481B /* art.scnassets in Resources */,
 				273400181F57775B005E481B /* LaunchScreen.storyboard in Resources */,
+				65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */,
 				273400151F57775B005E481B /* Assets.xcassets in Resources */,
 				273400131F57775B005E481B /* Main.storyboard in Resources */,
 			);
@@ -200,12 +210,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-frameworks.sh",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
-				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -218,9 +226,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -235,6 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				273400101F57775B005E481B /* ViewController.swift in Sources */,
+				65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */,
+				65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */,
 				27F176D21F5783C600284659 /* Inits.swift in Sources */,
 				2734000C1F57775B005E481B /* AppDelegate.swift in Sources */,
 			);
@@ -375,10 +388,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D7RNUX836K;
+				DEVELOPMENT_TEAM = G48G88998S;
 				INFOPLIST_FILE = LiveDontDie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.richsong003.LiveDontDie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dham.LiveDontDie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -391,10 +404,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D7RNUX836K;
+				DEVELOPMENT_TEAM = G48G88998S;
 				INFOPLIST_FILE = LiveDontDie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.richsong003.LiveDontDie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dham.LiveDontDie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
