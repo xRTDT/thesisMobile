@@ -24,7 +24,7 @@ class Init {
             material.diffuse.contents = UIColor.red
             cube.materials = [material]
             node.geometry = cube
-            
+            node.opacity = 0.99
             let xPos = Float((drand48() - 0.5) * range)
             let zPos = Float((drand48() - 0.5) * range)
             node.name = "Marker" + String(describing: index)
