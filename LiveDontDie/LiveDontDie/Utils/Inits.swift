@@ -50,7 +50,6 @@ class Init {
         monster?.position = SCNVector3Make(xPos, 0, zPos)
         
         sceneView.scene.rootNode.addChildNode(monster!)
-        scene.rootNode.addChildNode(monster!)
         
         // Forces monster to be facing you at all times
         let targetNode = SCNLookAtConstraint(target: sceneView.pointOfView)
