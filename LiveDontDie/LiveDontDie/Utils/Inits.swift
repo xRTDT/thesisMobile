@@ -44,10 +44,7 @@ class Init {
         monster?.scale = SCNVector3Make(1, 1, 1)
         monster?.position = SCNVector3Make(current.x, current.y-2, current.z)
         monster?.name = "Monster"
-        
-        let xPos = Float((drand48() - 0.5) * range)
-        let zPos = Float((drand48() - 0.5) * range)
-        monster?.position = SCNVector3Make(xPos, 0, zPos)
+        monster?.position = SCNVector3Make(0, 0, Float(0.5*range))
         
         sceneView.scene.rootNode.addChildNode(monster!)
         

@@ -111,7 +111,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         //timer to instantiate monster
         
         func monsterTimer(){
-            timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
         }
         
         scheduledTimerWithTimeInterval()
@@ -139,7 +139,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     }
     
     @objc func monsterTimer(){
-        monsterRange = monsterRange - 0.5
+        monsterRange = monsterRange - 3
         monster?.removeFromParentNode()
         monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene, range: monsterRange)
     }
