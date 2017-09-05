@@ -139,7 +139,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     }
     
     @objc func monsterTimer(){
-        monsterRange = monsterRange - 1
+        monsterRange = monsterRange - 3
         monster?.removeFromParentNode()
         monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene, range: monsterRange)
     }
