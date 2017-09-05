@@ -36,15 +36,18 @@ class Init {
         return markers
     }
     
-    class func initMonster(sceneView: ARSCNView, scene: SCNScene, range: Double) -> SCNNode {
+    class func initMonster(sceneView: ARSCNView, scene: SCNScene, range: Float) -> SCNNode {
+        
         let current = sceneView.pointOfView!.position
-
         let obj = SCNScene(named: "../art.scnassets/ship.scn")
         let monster = obj?.rootNode.childNode(withName: "ship", recursively: true)!
         monster?.scale = SCNVector3Make(1, 1, 1)
-        monster?.position = SCNVector3Make(current.x, current.y-2, current.z)
         monster?.name = "Monster"
-        monster?.position = SCNVector3Make(0, 0, Float(0.5*range))
+        //monster is positioned to render 360 degrees around player at radius
+        let angle = Float.pi * Float(drand48()) * 2
+        let positionx = current.x + (range * sin(angle))
+        let positionz = current.z + (range * cos(angle))
+        monster?.position = SCNVector3Make(positionx, current.y, positionz)
         
         sceneView.scene.rootNode.addChildNode(monster!)
         
