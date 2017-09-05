@@ -73,7 +73,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     var progress: Int = 0
     var markers: Array<SCNNode>?
     var monster: SCNNode?
-    var monsterRange: Double = 30
+    var monsterRange: Float = 30
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var progressLabel: UILabel!
     
@@ -111,7 +111,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         //timer to instantiate monster
         
         func monsterTimer(){
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
         }
         
         scheduledTimerWithTimeInterval()
@@ -139,7 +139,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     }
     
     @objc func monsterTimer(){
-        monsterRange = monsterRange - 3
+        monsterRange = monsterRange - 1
         monster?.removeFromParentNode()
         monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene, range: monsterRange)
     }
