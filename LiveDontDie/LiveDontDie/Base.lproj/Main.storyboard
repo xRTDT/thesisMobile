@@ -83,8 +83,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="LoginPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="Cz0-o5-hp7"/>
-                                            <segue destination="BV1-FR-VrT" kind="presentation" identifier="LoginToAr" id="TtD-0N-LPJ"/>
+                                            <action selector="LoginButtonPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="WkA-HK-gdb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86J-Gf-ffu">
@@ -95,8 +94,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="SignupPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="kB1-dC-kTt"/>
-                                            <segue destination="BV1-FR-VrT" kind="presentation" identifier="SignUpToAr" id="tpp-KM-xwp"/>
+                                            <action selector="SignUpButtonPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="tLM-94-PrU"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S1o-RX-aXz">
@@ -115,6 +113,7 @@
                     <connections>
                         <outlet property="emailField" destination="S1o-RX-aXz" id="ZpH-xi-rOL"/>
                         <outlet property="passwordField" destination="e7i-0X-usi" id="2ia-Jn-k92"/>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="toAr" id="Jgw-a3-cZy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36j-rF-2zO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -164,7 +163,4 @@
             <point key="canvasLocation" x="801" y="89"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="TtD-0N-LPJ"/>
-    </inferredMetricsTieBreakers>
 </document>

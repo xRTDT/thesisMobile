@@ -25,14 +25,29 @@ class LoginSignUpViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func LoginPressed(_ sender: Any) {
+    @IBAction func LoginButtonPressed(_ sender: Any) {
+        FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+            if error != nil {
+                print("signin unsuccessful")
+                print(error!)
+            } else {
+                print("success")
+                self.performSegue(withIdentifier: "toAr", sender: self)
+            }
+        })
+    }
+    @IBAction func SignUpButtonPressed(_ sender: Any) {
         FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
             if error != nil {
                 print("signup unsuccessful")
                 print(error!)
+            } else {
+                print("success")
+                self.performSegue(withIdentifier: "toAr", sender: self)
             }
         })
     }
+    
     
 //    @IBAction func SignupPressed(_ sender: AnyObject) {
 //        FIRAuth.auth()?.createUser(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: { (user, error) in
