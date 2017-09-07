@@ -69,6 +69,7 @@ extension MBXCompassMapView {
 }
 
 class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
+    var currentScore: Int = 0
     var compass : MBXCompassMapView!
     var progress: Int = 0
     var markers: Array<SCNNode>?
@@ -162,8 +163,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 }
             }
         }
-        
-        
+       currentScore = Init.calculateScore(score: currentScore, currentProgress: progress)
     }
     
     @objc func monsterTimer(){
