@@ -83,8 +83,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="LoginPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="OZx-WX-d9o"/>
-                                            <segue destination="BV1-FR-VrT" kind="show" identifier="LoginToAr" id="t08-vd-n7I"/>
+                                            <action selector="LoginPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="Cz0-o5-hp7"/>
+                                            <segue destination="BV1-FR-VrT" kind="presentation" identifier="LoginToAr" id="TtD-0N-LPJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86J-Gf-ffu">
@@ -96,7 +96,7 @@
                                         </state>
                                         <connections>
                                             <action selector="SignupPressed:" destination="lwn-gT-aAc" eventType="touchUpInside" id="kB1-dC-kTt"/>
-                                            <segue destination="BV1-FR-VrT" kind="show" identifier="SignupToAr" id="3nh-HU-0i5"/>
+                                            <segue destination="BV1-FR-VrT" kind="presentation" identifier="SignUpToAr" id="tpp-KM-xwp"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S1o-RX-aXz">
@@ -165,6 +165,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3nh-HU-0i5"/>
+        <segue reference="TtD-0N-LPJ"/>
     </inferredMetricsTieBreakers>
 </document>
