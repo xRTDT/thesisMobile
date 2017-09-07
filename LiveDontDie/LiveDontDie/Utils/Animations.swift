@@ -50,5 +50,23 @@ class Animations {
         node.opacity = 0.0
         SCNTransaction.commit()
     }
+    
+    class func moveMonster(sceneView: ARSCNView, node: SCNNode) {
+        let currentPosition = sceneView.pointOfView!.position
+        let theta = atan2(currentPosition.z - node.position.z, currentPosition.x - node.position.x)
+        let newX = node.position.x + (1.7/60 * cos(theta))
+        let newZ = node.position.z + (1.7/60 * sin(theta))
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1/60
+        node.position = SCNVector3Make(newX, currentPosition.y, newZ)
+        SCNTransaction.commit()
+    }
+    
+    class func monsterAttack(sceneView: ARSCNView, node: SCNNode) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.1
+        node.position = sceneView.pointOfView!.position
+        SCNTransaction.commit()
+    }
 
 }
