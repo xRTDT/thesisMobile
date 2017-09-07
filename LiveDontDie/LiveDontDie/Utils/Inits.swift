@@ -54,10 +54,11 @@ class Init {
         // Forces monster to be facing you at all times
         let targetNode = SCNLookAtConstraint(target: sceneView.pointOfView)
         monster?.constraints = [targetNode]
-        
+        self.initDeath(sceneView: sceneView, node: monster!)
         return monster!
     }
     
+
     class func calculateDistance(sceneView: ARSCNView, node:SCNNode) -> Float {
         let current = sceneView.pointOfView!.position
             let distance = sqrt(
