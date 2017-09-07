@@ -81,5 +81,15 @@ class Init {
                 sceneView.scene.rootNode.addChildNode(note!)
             }
     }
+    class func calculateScore(score: Int, currentProgress: Int) -> Int{
+        var currentScore = score
+        var levelArray: [Int] = [2, 4, 8, 16, 32, 64, 128, 256];
+        
+        currentScore = currentScore + levelArray[currentProgress]
+        print(currentScore)
+        
+        
+        return currentScore
+    }
 }
 
