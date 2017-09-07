@@ -36,7 +36,7 @@ class Init {
         return markers
     }
     
-    class func initMonster(sceneView: ARSCNView, scene: SCNScene, range: Float) -> SCNNode {
+    class func initMonster(sceneView: ARSCNView, range: Float) -> SCNNode {
         
         let current = sceneView.pointOfView!.position
         let obj = SCNScene(named: "../art.scnassets/ship.scn")
@@ -58,31 +58,28 @@ class Init {
         return monster!
     }
     
-    class func calculateDistances(sceneView: ARSCNView, markers:Array<SCNNode>) -> Bool {
+    class func calculateDistance(sceneView: ARSCNView, node:SCNNode) -> Float {
         let current = sceneView.pointOfView!.position
-        for node in markers {
             let distance = sqrt(
                 pow(current.x - node.position.x, 2) +
                 pow(current.y - node.position.y, 2) +
                 pow(current.z - node.position.z, 2)
             )
-            if(distance < 3){
-                node.removeFromParentNode()
-                print(distance)
-                let name = "noteFor" + node.name!
-                //fix this later
-                if sceneView.scene.rootNode.childNode(withName: name, recursively: true) == nil {
-                    let obj = SCNScene(named: "../art.scnassets/ship.scn")
-                    let note = obj?.rootNode.childNode(withName: "ship", recursively: true)!
-                    note?.scale = SCNVector3Make(1, 1, 1)
-                    note?.name = name
-                    note?.position = SCNVector3Make(current.x, current.y-2, current.z)
-                    sceneView.scene.rootNode.addChildNode(note!)
-                    return true
+        return distance
                 }
-                }
+    
+    class func renderNote(sceneView: ARSCNView, node: SCNNode) {
+            node.removeFromParentNode()
+            let current = sceneView.pointOfView!.position
+            let name = "noteFor" + node.name!
+            if sceneView.scene.rootNode.childNode(withName: name, recursively: true) == nil {
+                let obj = SCNScene(named: "../art.scnassets/ship.scn")
+                let note = obj?.rootNode.childNode(withName: "ship", recursively: true)!
+                note?.scale = SCNVector3Make(1, 1, 1)
+                note?.name = name
+                note?.position = SCNVector3Make(current.x, current.y-2, current.z)
+                sceneView.scene.rootNode.addChildNode(note!)
             }
-        return false
-        }
     }
+}
 

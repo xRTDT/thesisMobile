@@ -105,7 +105,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         //timer to calculate distance
         
         func scheduledTimerWithTimeInterval(){
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.FrameTimer), userInfo: nil, repeats: true)
         }
         
         //timer to instantiate monster
@@ -131,17 +131,47 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         }
     }
     
-    @objc func timer(){
-        let close = Init.calculateDistances(sceneView: sceneView, markers: markers!)
-        if close {
-            Animations.displayNotification(message: "A note has appeared", label: progressLabel)
+    @objc func FrameTimer(){
+        
+        for node in markers! {
+            if Init.calculateDistance(sceneView: sceneView, node: node) < 3 {
+                Init.renderNote(sceneView: sceneView, node: node)
+            }
         }
+        if monster != nil {
+            if(sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) != nil){
+                let monsterDistance = Init.calculateDistance(sceneView: sceneView, node: monster!)
+                print(monsterDistance)
+                //fade out monster at large distances
+                if monsterDistance > 30 && monster!.opacity == 1 {
+                    Animations.fadeOut(node: monster!)
+                } else if monsterDistance < 30 && monster!.opacity == 0 {
+                    Animations.fadeIn(node: monster!)
+                }
+                
+                //remove monster from game is player is too far from monster
+                if monsterDistance > 35 {
+                    monster?.removeFromParentNode()
+                }
+                
+                if monsterDistance < 2 {
+                    monster?.removeAllActions()
+                    Animations.monsterAttack(sceneView: sceneView, node: monster!)
+                } else {
+                    Animations.moveMonster(sceneView: sceneView, node: monster!)
+                }
+            }
+        }
+        
+        
     }
     
     @objc func monsterTimer(){
         monsterRange = monsterRange - 1
-        monster?.removeFromParentNode()
-        monster = Init.initMonster(sceneView: sceneView, scene: self.sceneView.scene, range: monsterRange)
+        if monster == nil || sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) == nil {
+            print("monster is rendered")
+            monster = Init.initMonster(sceneView: sceneView, range: monsterRange)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
