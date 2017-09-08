@@ -58,7 +58,7 @@ class Animations {
         let newZ = node.position.z + (1.7/60 * sin(theta))
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1/60
-        node.position = SCNVector3Make(newX, currentPosition.y, newZ)
+        node.position = SCNVector3Make(newX, node.position.y, newZ)
         SCNTransaction.commit()
     }
     
