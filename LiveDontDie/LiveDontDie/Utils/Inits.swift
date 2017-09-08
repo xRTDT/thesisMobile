@@ -17,7 +17,6 @@ class Init {
         for index in 1...8 {
             //change range to make playing area bigger/smaller
             let range = 30.0
-            
             let node = SCNNode()
             let cube = SCNBox(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0)
             let material = SCNMaterial()
@@ -25,38 +24,40 @@ class Init {
             cube.materials = [material]
             node.geometry = cube
             node.opacity = 0.99
+            let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
+            srand48(Int(time))
             let xPos = Float((drand48() - 0.5) * range)
+            srand48(Int(time))
             let zPos = Float((drand48() - 0.5) * range)
             node.name = "Marker" + String(describing: index)
             node.position = SCNVector3Make(xPos, 0, zPos)
             scene.rootNode.addChildNode(node)
             markers.append(node)
         }
-        
         return markers
     }
     
     class func initMonster(sceneView: ARSCNView, range: Float) -> SCNNode {
-        
         let current = sceneView.pointOfView!.position
-        let obj = SCNScene(named: "../art.scnassets/ship.scn")
-        let monster = obj?.rootNode.childNode(withName: "ship", recursively: true)!
-        monster?.scale = SCNVector3Make(1, 1, 1)
+        let obj = SCNScene(named: "../art.scnassets/scarygirl.scn")
+        let monster = obj?.rootNode.childNode(withName: "scarygirl", recursively: true)!
         monster?.name = "Monster"
+        
         //monster is positioned to render 360 degrees around player at radius
-        let angle = Float.pi * Float(drand48()) * 2
+        let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
+        srand48(Int(time))
+        let angle = Float.pi * Float(drand48() * 2)
         let positionx = current.x + (range * sin(angle))
         let positionz = current.z + (range * cos(angle))
-        monster?.position = SCNVector3Make(positionx, current.y, positionz)
-        
+        monster?.position = SCNVector3Make(positionx, current.y - 11, positionz)
+        monster?.scale = SCNVector3Make(1, 1, 1)
         sceneView.scene.rootNode.addChildNode(monster!)
-        
+
         // Forces monster to be facing you at all times
-        let targetNode = SCNLookAtConstraint(target: sceneView.pointOfView)
-        monster?.constraints = [targetNode]
+        let target = SCNBillboardConstraint()
+        monster?.constraints = [target]
         return monster!
     }
-    
 
     class func calculateDistance(sceneView: ARSCNView, node:SCNNode) -> Float {
         let current = sceneView.pointOfView!.position
@@ -73,7 +74,7 @@ class Init {
             let current = sceneView.pointOfView!.position
             let name = "noteFor" + node.name!
             if sceneView.scene.rootNode.childNode(withName: name, recursively: true) == nil {
-                let obj = SCNScene(named: "../art.scnassets/ship.scn")
+                let obj = SCNScene(named: "../art.scnassets/ship")
                 let note = obj?.rootNode.childNode(withName: "ship", recursively: true)!
                 note?.scale = SCNVector3Make(1, 1, 1)
                 note?.name = name
@@ -81,13 +82,12 @@ class Init {
                 sceneView.scene.rootNode.addChildNode(note!)
             }
     }
+    
     class func calculateScore(score: Int, currentProgress: Int) -> Int{
         var currentScore = score
         var levelArray: [Int] = [2, 4, 8, 16, 32, 64, 128, 256];
         
-        currentScore = currentScore + levelArray[currentProgress]
-        print(currentScore)
-        
+        currentScore = currentScore + levelArray[currentProgress]        
         
         return currentScore
     }

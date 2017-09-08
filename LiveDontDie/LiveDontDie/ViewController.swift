@@ -142,7 +142,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         if monster != nil {
             if(sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) != nil){
                 let monsterDistance = Init.calculateDistance(sceneView: sceneView, node: monster!)
-                print(monsterDistance)
                 //fade out monster at large distances
                 if monsterDistance > 30 && monster!.opacity == 1 {
                     Animations.fadeOut(node: monster!)
@@ -155,9 +154,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                     monster?.removeFromParentNode()
                 }
                 
-                if monsterDistance < 2 {
+                if monsterDistance < 3 {
                     monster?.removeAllActions()
-                    Animations.monsterAttack(sceneView: sceneView, node: monster!)
+//                    Animations.monsterAttack(sceneView: sceneView, node: monster!)
                 } else {
                     Animations.moveMonster(sceneView: sceneView, node: monster!)
                 }
