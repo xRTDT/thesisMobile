@@ -76,7 +76,7 @@ class Init {
             let current = sceneView.pointOfView!.position
             let name = "noteFor" + node.name!
             if sceneView.scene.rootNode.childNode(withName: name, recursively: true) == nil {
-                let obj = SCNScene(named: "../art.scnassets/ship")
+                let obj = SCNScene(named: "../art.scnassets/ship.scn")
                 let note = obj?.rootNode.childNode(withName: "ship", recursively: true)!
                 note?.scale = SCNVector3Make(1, 1, 1)
                 note?.name = name
