@@ -37,26 +37,28 @@ class Init {
         return markers
     }
     
-    class func initMonster(sceneView: ARSCNView, range: Float) -> SCNNode {
-        let current = sceneView.pointOfView!.position
+    class func initMonster() -> SCNNode {
         let obj = SCNScene(named: "../art.scnassets/scarygirl.scn")
         let monster = obj?.rootNode.childNode(withName: "scarygirl", recursively: true)!
         monster?.name = "Monster"
-        
+        return monster!
+    }
+    
+    class func renderMonster(sceneView: ARSCNView, range: Float, monster: SCNNode) {
+        let current = sceneView.pointOfView!.position
         //monster is positioned to render 360 degrees around player at radius
         let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
         srand48(Int(time))
         let angle = Float.pi * Float(drand48() * 2)
         let positionx = current.x + (range * sin(angle))
         let positionz = current.z + (range * cos(angle))
-        monster?.position = SCNVector3Make(positionx, current.y - 11, positionz)
-        monster?.scale = SCNVector3Make(1, 1, 1)
-        sceneView.scene.rootNode.addChildNode(monster!)
+        monster.position = SCNVector3Make(positionx, current.y - 2, positionz)
+        monster.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        sceneView.scene.rootNode.addChildNode(monster)
 
         // Forces monster to be facing you at all times
         let target = SCNBillboardConstraint()
-        monster?.constraints = [target]
-        return monster!
+        monster.constraints = [target]
     }
 
     class func calculateDistance(sceneView: ARSCNView, node:SCNNode) -> Float {

@@ -83,6 +83,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         sceneView.delegate = self
         let scene = SCNScene(named: "art.scnassets/main.scn")!
         markers = Init.initMarkers(scene: scene)
+        monster = Init.initMonster()
         sceneView.scene = scene
         
         compass = MBXCompassMapView(frame: CGRect(x: 20,
@@ -156,7 +157,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 
                 if monsterDistance < 3 {
                     monster?.removeAllActions()
-//                    Animations.monsterAttack(sceneView: sceneView, node: monster!)
+                    Animations.monsterAttack(sceneView: sceneView, node: monster!)
                 } else {
                     Animations.moveMonster(sceneView: sceneView, node: monster!)
                 }
@@ -169,7 +170,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         monsterRange = monsterRange - 1
         if monster == nil || sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) == nil {
             print("monster is rendered")
-            monster = Init.initMonster(sceneView: sceneView, range: monsterRange)
+            Init.renderMonster(sceneView: sceneView, range: monsterRange, monster: monster!)
         }
     }
     

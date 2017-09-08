@@ -18,10 +18,11 @@
 		65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */; };
 		65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */; };
 		65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */; };
-		9BA5EE5FFBBB8D9D726FBBDD /* libPods-LiveDontDie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 583E058DBC48A3B9A4EE8729 /* libPods-LiveDontDie.a */; };
+		BDF35BF98C47E7F034E49AC5 /* libPods-LiveDontDie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0058C978C13BD090A0DA2DDB /* Pods-LiveDontDie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.release.xcconfig"; sourceTree = "<group>"; };
 		273400081F57775B005E481B /* LiveDontDie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveDontDie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2734000B1F57775B005E481B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2734000D1F57775B005E481B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -32,12 +33,11 @@
 		273400191F57775B005E481B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F176D11F5783C600284659 /* Inits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inits.swift; sourceTree = "<group>"; };
 		27F176D91F5A13C400284659 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
-		583E058DBC48A3B9A4EE8729 /* libPods-LiveDontDie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveDontDie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6387580DC5A1590943D1B2B8 /* Pods-LiveDontDie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.release.xcconfig"; sourceTree = "<group>"; };
 		65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
-		B6F2D6DDBA966F4430FE8B20 /* Pods-LiveDontDie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.debug.xcconfig"; sourceTree = "<group>"; };
+		E18834C9F44598636E086F72 /* Pods-LiveDontDie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.debug.xcconfig"; sourceTree = "<group>"; };
+		ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveDontDie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,13 +45,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BA5EE5FFBBB8D9D726FBBDD /* libPods-LiveDontDie.a in Frameworks */,
+				BDF35BF98C47E7F034E49AC5 /* libPods-LiveDontDie.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08906791ED0EA2BB799ABED5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		273400091F57775B005E481B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,8 +91,8 @@
 			children = (
 				2734000A1F57775B005E481B /* LiveDontDie */,
 				273400091F57775B005E481B /* Products */,
-				F9B9E39944403B1455CD07F7 /* Pods */,
-				971D9B0942BF97C4B9063193 /* Frameworks */,
+				FB118A3AB3F68212871F4049 /* Pods */,
+				08906791ED0EA2BB799ABED5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,19 +105,11 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		971D9B0942BF97C4B9063193 /* Frameworks */ = {
+		FB118A3AB3F68212871F4049 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				583E058DBC48A3B9A4EE8729 /* libPods-LiveDontDie.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F9B9E39944403B1455CD07F7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B6F2D6DDBA966F4430FE8B20 /* Pods-LiveDontDie.debug.xcconfig */,
-				6387580DC5A1590943D1B2B8 /* Pods-LiveDontDie.release.xcconfig */,
+				E18834C9F44598636E086F72 /* Pods-LiveDontDie.debug.xcconfig */,
+				0058C978C13BD090A0DA2DDB /* Pods-LiveDontDie.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -121,12 +121,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2734001C1F57775B005E481B /* Build configuration list for PBXNativeTarget "LiveDontDie" */;
 			buildPhases = (
-				7217DF75261A0FFDF1BAED03 /* [CP] Check Pods Manifest.lock */,
+				D466FF683F708EE1C7343F6C /* [CP] Check Pods Manifest.lock */,
 				273400041F57775B005E481B /* Sources */,
 				273400051F57775B005E481B /* Frameworks */,
 				273400061F57775B005E481B /* Resources */,
-				738F2D9877A82410929495F0 /* [CP] Embed Pods Frameworks */,
-				8975DA806454651C35A78E09 /* [CP] Copy Pods Resources */,
+				F0C92449662C4DEB9B0E8221 /* [CP] Embed Pods Frameworks */,
+				9AD2C7829C8E84D7600B27EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,7 +187,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7217DF75261A0FFDF1BAED03 /* [CP] Check Pods Manifest.lock */ = {
+		9AD2C7829C8E84D7600B27EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D466FF683F708EE1C7343F6C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -205,7 +223,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		738F2D9877A82410929495F0 /* [CP] Embed Pods Frameworks */ = {
+		F0C92449662C4DEB9B0E8221 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -213,32 +231,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-frameworks.sh",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8975DA806454651C35A78E09 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-resources.sh",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -388,15 +390,15 @@
 		};
 		2734001D1F57775B005E481B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6F2D6DDBA966F4430FE8B20 /* Pods-LiveDontDie.debug.xcconfig */;
+			baseConfigurationReference = E18834C9F44598636E086F72 /* Pods-LiveDontDie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JMEJ95XGLX;
+				DEVELOPMENT_TEAM = DU47BS594A;
 				INFOPLIST_FILE = LiveDontDie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taeminpak.LiveDontDie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tkyoon.LiveDontDie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -406,15 +408,15 @@
 		};
 		2734001E1F57775B005E481B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6387580DC5A1590943D1B2B8 /* Pods-LiveDontDie.release.xcconfig */;
+			baseConfigurationReference = 0058C978C13BD090A0DA2DDB /* Pods-LiveDontDie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JMEJ95XGLX;
+				DEVELOPMENT_TEAM = DU47BS594A;
 				INFOPLIST_FILE = LiveDontDie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taeminpak.LiveDontDie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tkyoon.LiveDontDie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
