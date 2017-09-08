@@ -13,6 +13,7 @@
 		273400131F57775B005E481B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273400111F57775B005E481B /* Main.storyboard */; };
 		273400151F57775B005E481B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273400141F57775B005E481B /* Assets.xcassets */; };
 		273400181F57775B005E481B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273400161F57775B005E481B /* LaunchScreen.storyboard */; };
+		27B577B91F631A1100E2CCC3 /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B577B81F631A1100E2CCC3 /* Compass.swift */; };
 		27F176D21F5783C600284659 /* Inits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F176D11F5783C600284659 /* Inits.swift */; };
 		27F176DA1F5A13C400284659 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F176D91F5A13C400284659 /* Animations.swift */; };
 		65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */; };
@@ -31,6 +32,7 @@
 		273400141F57775B005E481B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		273400171F57775B005E481B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		273400191F57775B005E481B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27B577B81F631A1100E2CCC3 /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
 		27F176D11F5783C600284659 /* Inits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inits.swift; sourceTree = "<group>"; };
 		27F176D91F5A13C400284659 /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				27F176D11F5783C600284659 /* Inits.swift */,
 				27F176D91F5A13C400284659 /* Animations.swift */,
+				27B577B81F631A1100E2CCC3 /* Compass.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */,
 				27F176DA1F5A13C400284659 /* Animations.swift in Sources */,
 				65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */,
+				27B577B91F631A1100E2CCC3 /* Compass.swift in Sources */,
 				27F176D21F5783C600284659 /* Inits.swift in Sources */,
 				2734000C1F57775B005E481B /* AppDelegate.swift in Sources */,
 			);

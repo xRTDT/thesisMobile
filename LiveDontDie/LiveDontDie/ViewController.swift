@@ -12,62 +12,6 @@ import SceneKit
 import ARKit
 import Mapbox
 
-class MBXCompassMapView: MGLMapView, MGLMapViewDelegate {
-    
-    var isMapInteractive : Bool = true {
-        didSet {
-            self.isZoomEnabled = false
-            self.isScrollEnabled = false
-            self.isPitchEnabled = false
-            self.isRotateEnabled = false
-        }
-    }
-    
-    override convenience init(frame: CGRect, styleURL: URL?) {
-        self.init(frame: frame)
-        self.styleURL = styleURL
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.delegate = self
-        self.alpha = 0.8
-        self.delegate = self
-        hideMapSubviews()
-    }
-    
-    override func layoutSubviews() {
-        self.layer.cornerRadius = self.frame.width / 2
-    }
-    
-    private func hideMapSubviews() {
-        self.logoView.isHidden = true
-        self.attributionButton.isHidden = true
-        self.compassView.isHidden = true
-    }
-    
-    func mapViewWillStartLoadingMap(_ mapView: MGLMapView) {
-        self.userTrackingMode = .followWithHeading
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setMapViewBorderColorAndWidth(color: CGColor, width: CGFloat) {
-        self.layer.borderWidth = width
-        self.layer.borderColor = color
-    }
-}
-
-extension MBXCompassMapView {
-    func setupUserTrackingMode() {
-        self.showsUserLocation = true
-        self.setUserTrackingMode(.followWithHeading, animated: false)
-        self.displayHeadingCalibration = false
-    }
-}
-
 class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     var currentScore: Int = 0
     var compass : MBXCompassMapView!
@@ -79,21 +23,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     @IBOutlet weak var progressLabel: UILabel!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         sceneView.delegate = self
         let scene = SCNScene(named: "art.scnassets/main.scn")!
-        markers = Init.initMarkers(scene: scene)
-        monster = Init.initMonster()
         sceneView.scene = scene
         
-        compass = MBXCompassMapView(frame: CGRect(x: 20,
-                                                  y: 20,
-                                                  width: view.bounds.width / 3,
-                                                  height: view.bounds.width / 3),
-                                    styleURL: URL(string: "mapbox://styles/jordankiley/cj5eeueie1bsa2rp4swgcteml"))
+        markers = Init.initMarkers(scene: scene)
+        monster = Init.initMonster()
         
-        compass.isMapInteractive = false
-        compass.tintColor = .black
+        compass = MBXCompassMapView.initCompass(view: view)
         compass.delegate = self
         view.addSubview(compass)
         
@@ -103,20 +42,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         sceneView.addGestureRecognizer(tap)
         
         var timer = Timer()
-        
-        //timer to calculate distance
-        
-        func scheduledTimerWithTimeInterval(){
+        func frameTimer(){
             timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.FrameTimer), userInfo: nil, repeats: true)
         }
-        
-        //timer to instantiate monster
         
         func monsterTimer(){
             timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
         }
         
-        scheduledTimerWithTimeInterval()
+        frameTimer()
         monsterTimer()
     }
     
@@ -136,8 +70,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     @objc func FrameTimer(){
         
         for node in markers! {
-            if Init.calculateDistance(sceneView: sceneView, node: node) < 3 {
-                Init.renderNote(sceneView: sceneView, node: node)
+            let markerDistance = Init.calculateDistance(sceneView: sceneView, node: node)
+            if markerDistance < 5 {
+                Animations.displayNotification(message: "You are close to a note", label: progressLabel)
+                if markerDistance < 3 {
+                    Init.renderNote(sceneView: sceneView, node: node)
+                }
             }
         }
         if monster != nil {
@@ -169,7 +107,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     @objc func monsterTimer(){
         monsterRange = monsterRange - 1
         if monster == nil || sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) == nil {
-            print("monster is rendered")
             Init.renderMonster(sceneView: sceneView, range: monsterRange, monster: monster!)
         }
     }
@@ -187,6 +124,5 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
 }
