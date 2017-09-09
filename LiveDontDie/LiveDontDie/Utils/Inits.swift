@@ -24,10 +24,7 @@ class Init {
             cube.materials = [material]
             node.geometry = cube
             node.opacity = 0.99
-            let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
-            srand48(Int(time))
             let xPos = Float((drand48() - 0.5) * range)
-            srand48(Int(time))
             let zPos = Float((drand48() - 0.5) * range)
             node.name = "Marker" + String(describing: index)
             node.position = SCNVector3Make(xPos, 0, zPos)
@@ -54,6 +51,7 @@ class Init {
         let positionz = current.z + (range * cos(angle))
         monster.position = SCNVector3Make(positionx, current.y - 2, positionz)
         monster.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        monster.opacity = 0.0
         sceneView.scene.rootNode.addChildNode(monster)
 
         // Forces monster to be facing you at all times
@@ -81,7 +79,9 @@ class Init {
                 note?.scale = SCNVector3Make(1, 1, 1)
                 note?.name = name
                 note?.position = SCNVector3Make(current.x, current.y-2, current.z)
+                note?.opacity = 0
                 sceneView.scene.rootNode.addChildNode(note!)
+                Animations.fadeIn(node: note!)
             }
     }
     

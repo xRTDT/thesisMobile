@@ -66,6 +66,9 @@ class Animations {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.1
         node.position = sceneView.pointOfView!.position
+        SCNTransaction.completionBlock = {
+            //put segway here
+        }
         SCNTransaction.commit()
     }
 
