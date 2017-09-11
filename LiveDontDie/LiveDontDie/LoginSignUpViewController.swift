@@ -37,13 +37,24 @@ class LoginSignUpViewController: UIViewController {
         })
     }
     @IBAction func SignUpButtonPressed(_ sender: Any) {
-        FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+        FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user: FIRUser?, error) in
             if error != nil {
                 print("signup unsuccessful")
                 print(error!)
             } else {
+                guard let uid = user?.uid else {
+                    return
+                }
                 print("success")
-                self.performSegue(withIdentifier: "toAr", sender: self)
+                let userId = FIRDatabase.database().reference().child("Users").child(uid)
+                let values = ["name": self.emailField.text!, "HighScore": 0] as [String : Any]
+                userId.updateChildValues(values, withCompletionBlock: {(error, ref) in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        self.performSegue(withIdentifier: "toAr", sender: self)
+                    }
+                })
             }
         })
     }
