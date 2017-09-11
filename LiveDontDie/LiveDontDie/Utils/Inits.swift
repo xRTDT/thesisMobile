@@ -9,6 +9,7 @@
 import Foundation
 import SceneKit
 import ARKit
+import Firebase
 
 class Init {
     
@@ -92,6 +93,25 @@ class Init {
         currentScore = currentScore + levelArray[currentProgress]        
         
         return currentScore
+    }
+    
+    class func toDeathScreen(finalScore: Int) {
+        let usersDB = FIRDatabase.database().reference().child("Users")
+        //        let userDictionary = ["name": FIRAuth.auth()?.currentUser?.email as Any, "HighScore": finalScore] as [String : Any]
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        usersDB.child(userID!).child("HighScore").observe(.childAdded, with: {(snapshot) in
+            let highScoreVal = snapshot.value as! Int
+            if finalScore > highScoreVal {
+                usersDB.child(userID!).setValue(finalScore) {
+                    (error, ref) in
+                    if error != nil {
+                        print(error!)
+                    } else {
+                        print("score sent to DB")
+                    }
+                }
+            }
+        })
     }
 }
 

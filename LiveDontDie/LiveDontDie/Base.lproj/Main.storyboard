@@ -156,11 +156,33 @@
                     <connections>
                         <outlet property="progressLabel" destination="Npf-yC-y6j" id="hoo-L5-pOJ"/>
                         <outlet property="sceneView" destination="xe6-FJ-Sfb" id="PZF-nb-b2X"/>
+                        <segue destination="Lfh-OM-BDr" kind="show" identifier="toDeath" id="HOa-Lf-DbW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="801" y="89"/>
+        </scene>
+        <!--Death View Controller-->
+        <scene sceneID="PQo-Hf-LzB">
+            <objects>
+                <viewController id="Lfh-OM-BDr" customClass="DeathViewController" customModule="LiveDontDie" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0eD-Qd-CYg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ha3-TK-xO8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="7Tv-Uv-Ody"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Oi-5L-DPI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1509.5999999999999" y="88.605697151424295"/>
         </scene>
     </scenes>
 </document>
