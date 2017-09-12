@@ -62,12 +62,14 @@ class Animations {
         SCNTransaction.commit()
     }
     
-    class func monsterAttack(sceneView: ARSCNView, node: SCNNode) {
+    class func monsterAttack(sceneView: ARSCNView, node: SCNNode, score: Int, view: UIViewController) {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.1
         node.position = sceneView.pointOfView!.position
         SCNTransaction.completionBlock = {
-            //put segway here
+            print("monster Attack is triggering to death screen")
+            Init.toDeathScreen(finalScore: score)
+            view.performSegue(withIdentifier: "toDeath", sender: view)
         }
         SCNTransaction.commit()
     }
