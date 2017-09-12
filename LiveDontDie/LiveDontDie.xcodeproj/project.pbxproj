@@ -22,7 +22,7 @@
 		65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */; };
 		65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */; };
 		65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */; };
-		651920F41F6700DA0077428F /* DeathViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 651920F31F6700DA0077428F /* DeathViewController.swift */; };
+		651920F61F68408E0077428F /* DeathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651920F51F68408E0077428F /* DeathViewController.swift */; };
 		BDF35BF98C47E7F034E49AC5 /* libPods-LiveDontDie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 		65058F4C1F59F32E00A8C1C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
-		651920F31F6700DA0077428F /* DeathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeathViewController.swift; path = /Users/Daniel/hrla16/thesisMobile/LiveDontDie/LiveDontDie/DeathViewController.swift; sourceTree = "<absolute>"; };
+		651920F51F68408E0077428F /* DeathViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeathViewController.swift; sourceTree = "<group>"; };
 		E18834C9F44598636E086F72 /* Pods-LiveDontDie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.debug.xcconfig"; sourceTree = "<group>"; };
 		ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveDontDie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -86,9 +86,9 @@
 				27B577C61F636D3600E2CCC3 /* monsterClose.wav */,
 				27F176D01F5783B400284659 /* Utils */,
 				2734000B1F57775B005E481B /* AppDelegate.swift */,
+				651920F51F68408E0077428F /* DeathViewController.swift */,
 				2734000F1F57775B005E481B /* ViewController.swift */,
 				273400111F57775B005E481B /* Main.storyboard */,
-				651920F31F6700DA0077428F /* DeathViewController.swift */,
 				65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */,
 				65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */,
 				2734000D1F57775B005E481B /* art.scnassets */,
@@ -193,7 +193,6 @@
 			files = (
 				27B577C71F636ED600E2CCC3 /* monsterClose.wav in Resources */,
 				2734000E1F57775B005E481B /* art.scnassets in Resources */,
-				651920F41F6700DA0077428F /* DeathViewController.swift in Resources */,
 				27B577C91F6487F200E2CCC3 /* pickup.wav in Resources */,
 				273400181F57775B005E481B /* LaunchScreen.storyboard in Resources */,
 				65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */,
@@ -268,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				273400101F57775B005E481B /* ViewController.swift in Sources */,
+				651920F61F68408E0077428F /* DeathViewController.swift in Sources */,
 				65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */,
 				27F176DA1F5A13C400284659 /* Animations.swift in Sources */,
 				65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */,
