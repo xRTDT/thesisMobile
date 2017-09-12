@@ -26,6 +26,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     var SFXplayer: AVAudioPlayer!
     var monsterGotWithinrange: Bool = false
     var isCloseToNote: Bool = false
+    var alive: Bool = true
+    var monster_timer: Timer? = nil
+    var frame_timer: Timer? = nil
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var progressLabel: UILabel!
@@ -59,13 +62,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         sceneView.addGestureRecognizer(tap)
         
-        var timer = Timer()
+        monster_timer = Timer()
+        frame_timer = Timer()
         func frameTimer(){
-            timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.FrameTimer), userInfo: nil, repeats: true)
+            frame_timer = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(self.FrameTimer), userInfo: nil, repeats: true)
         }
         
         func monsterTimer(){
-            timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
+            monster_timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
         }
         
         frameTimer()
@@ -97,8 +101,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     }
     
     @objc func FrameTimer(){
-        var closestNote: Float?
-        
+        var closestNote: Float? = 999999
+        print(currentScore)
         for node in markers! {
             let markerDistance = Init.calculateDistance(sceneView: sceneView, node: node)
             if markerDistance < closestNote! || closestNote == nil {
@@ -141,7 +145,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 } else if monsterDistance < 30 && monster!.opacity == 0 {
                     monsterGotWithinrange = true
                     Animations.fadeIn(node: monster!)
-                    print("monster has faded in")
                     let path = Bundle.main.path(forResource: "monsterClose", ofType: "wav")!
                     let sfxURL = URL(fileURLWithPath: path)
                     do {
@@ -157,14 +160,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 
 
                 if monsterDistance > 50 && monsterGotWithinrange {
-                    print("monster unrendered")
                     monster?.removeFromParentNode()
                     monsterGotWithinrange = false
                 }
                 
                 if monsterDistance < 3 {
                     monster?.removeAllActions()
-                    Animations.monsterAttack(sceneView: sceneView, node: monster!)
+                    Animations.monsterAttack(sceneView: sceneView, node: monster!, score: currentScore, view: self)
+                    monster_timer!.invalidate()
+                    frame_timer!.invalidate()
                 } else {
                     Animations.moveMonster(sceneView: sceneView, node: monster!)
                 }

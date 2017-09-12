@@ -17,7 +17,7 @@ class Init {
         var markers: Array<SCNNode> = []
         for index in 1...8 {
             //change range to make playing area bigger/smaller
-            let range = 30.0
+            let range = 200.0
             let node = SCNNode()
             let cube = SCNBox(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0)
             let material = SCNMaterial()
@@ -97,12 +97,13 @@ class Init {
     
     class func toDeathScreen(finalScore: Int) {
         let usersDB = FIRDatabase.database().reference().child("Users")
-        //        let userDictionary = ["name": FIRAuth.auth()?.currentUser?.email as Any, "HighScore": finalScore] as [String : Any]
         let userID = FIRAuth.auth()?.currentUser?.uid
-        usersDB.child(userID!).child("HighScore").observe(.childAdded, with: {(snapshot) in
+        usersDB.child(userID!).child("HighScore").observe(FIRDataEventType.value, with: {(snapshot) in
             let highScoreVal = snapshot.value as! Int
+            print("final score is \(finalScore)")
+            print("highScoreVal is \(highScoreVal)")
             if finalScore > highScoreVal {
-                usersDB.child(userID!).setValue(finalScore) {
+                usersDB.child(userID!).child("HighScore").setValue(finalScore) {
                     (error, ref) in
                     if error != nil {
                         print(error!)
