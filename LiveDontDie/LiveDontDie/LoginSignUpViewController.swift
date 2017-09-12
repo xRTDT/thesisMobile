@@ -25,10 +25,17 @@ class LoginSignUpViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func createAlert (title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) in}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func LoginButtonPressed(_ sender: Any) {
         FIRAuth.auth()?.signIn(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
             if error != nil {
-                print("signin unsuccessful")
+                self.createAlert(title: "Login Unsuccessful", message: "Please input correct email address and password.")
                 print(error!)
             } else {
                 print("success")
@@ -39,7 +46,7 @@ class LoginSignUpViewController: UIViewController {
     @IBAction func SignUpButtonPressed(_ sender: Any) {
         FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user: FIRUser?, error) in
             if error != nil {
-                print("signup unsuccessful")
+                self.createAlert(title: "Sign Up Unsuccessful", message: "Please input correct email address and password. Password must be at least 6 characters.")
                 print(error!)
             } else {
                 guard let uid = user?.uid else {
