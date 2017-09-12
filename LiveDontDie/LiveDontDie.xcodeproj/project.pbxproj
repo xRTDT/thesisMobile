@@ -14,7 +14,7 @@
 		273400151F57775B005E481B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273400141F57775B005E481B /* Assets.xcassets */; };
 		273400181F57775B005E481B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273400161F57775B005E481B /* LaunchScreen.storyboard */; };
 		27B577B91F631A1100E2CCC3 /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B577B81F631A1100E2CCC3 /* Compass.swift */; };
-		27B577C31F635D0900E2CCC3 /* bgm.WAV in Resources */ = {isa = PBXBuildFile; fileRef = 27B577C21F635CD400E2CCC3 /* bgm.WAV */; };
+		27B577C31F635D0900E2CCC3 /* bgm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 27B577C21F635CD400E2CCC3 /* bgm.wav */; };
 		27B577C71F636ED600E2CCC3 /* monsterClose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 27B577C61F636D3600E2CCC3 /* monsterClose.wav */; };
 		27B577C91F6487F200E2CCC3 /* pickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = 27B577C81F6486FA00E2CCC3 /* pickup.wav */; };
 		27F176D21F5783C600284659 /* Inits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F176D11F5783C600284659 /* Inits.swift */; };
@@ -23,6 +23,7 @@
 		65058F4F1F59F57600A8C1C2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */; };
 		65058F511F59F60D00A8C1C2 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */; };
 		651920F61F68408E0077428F /* DeathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651920F51F68408E0077428F /* DeathViewController.swift */; };
+		909E7FD81F688B5A00134D59 /* attack.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9014FB071F688821006C3458 /* attack.wav */; };
 		BDF35BF98C47E7F034E49AC5 /* libPods-LiveDontDie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +38,7 @@
 		273400171F57775B005E481B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		273400191F57775B005E481B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27B577B81F631A1100E2CCC3 /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
-		27B577C21F635CD400E2CCC3 /* bgm.WAV */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm.WAV; sourceTree = "<group>"; };
+		27B577C21F635CD400E2CCC3 /* bgm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm.wav; sourceTree = "<group>"; };
 		27B577C61F636D3600E2CCC3 /* monsterClose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = monsterClose.wav; sourceTree = "<group>"; };
 		27B577C81F6486FA00E2CCC3 /* pickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pickup.wav; sourceTree = "<group>"; };
 		27F176D11F5783C600284659 /* Inits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inits.swift; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 		65058F4E1F59F57600A8C1C2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		65058F501F59F60D00A8C1C2 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		651920F51F68408E0077428F /* DeathViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeathViewController.swift; sourceTree = "<group>"; };
+		9014FB071F688821006C3458 /* attack.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = attack.wav; sourceTree = "<group>"; };
 		E18834C9F44598636E086F72 /* Pods-LiveDontDie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveDontDie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveDontDie/Pods-LiveDontDie.debug.xcconfig"; sourceTree = "<group>"; };
 		ECC5368A16FBAD2CEF4B44BA /* libPods-LiveDontDie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveDontDie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -81,7 +83,8 @@
 		2734000A1F57775B005E481B /* LiveDontDie */ = {
 			isa = PBXGroup;
 			children = (
-				27B577C21F635CD400E2CCC3 /* bgm.WAV */,
+				27B577C21F635CD400E2CCC3 /* bgm.wav */,
+				9014FB071F688821006C3458 /* attack.wav */,
 				27B577C81F6486FA00E2CCC3 /* pickup.wav */,
 				27B577C61F636D3600E2CCC3 /* monsterClose.wav */,
 				27F176D01F5783B400284659 /* Utils */,
@@ -196,7 +199,8 @@
 				27B577C91F6487F200E2CCC3 /* pickup.wav in Resources */,
 				273400181F57775B005E481B /* LaunchScreen.storyboard in Resources */,
 				65058F4D1F59F33200A8C1C2 /* GoogleService-Info.plist in Resources */,
-				27B577C31F635D0900E2CCC3 /* bgm.WAV in Resources */,
+				27B577C31F635D0900E2CCC3 /* bgm.wav in Resources */,
+				909E7FD81F688B5A00134D59 /* attack.wav in Resources */,
 				273400151F57775B005E481B /* Assets.xcassets in Resources */,
 				273400131F57775B005E481B /* Main.storyboard in Resources */,
 			);

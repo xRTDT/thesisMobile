@@ -24,6 +24,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     var BGMplayer: AVAudioPlayer!
     var monsterPlayer: AVAudioPlayer!
     var SFXplayer: AVAudioPlayer!
+    var ATKplayer: AVAudioPlayer!
     var monsterGotWithinrange: Bool = false
     var isCloseToNote: Bool = false
     var alive: Bool = true
@@ -48,7 +49,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         view.addSubview(compass)
         
 //        AudioPlayer.playBGM()
-        let path = Bundle.main.path(forResource: "bgm", ofType: "WAV")!
+        let path = Bundle.main.path(forResource: "bgm", ofType: "wav")!
         let bgmURL = URL(fileURLWithPath: path)
         do {
             BGMplayer = try AVAudioPlayer(contentsOf: bgmURL)
@@ -165,6 +166,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 }
                 
                 if monsterDistance < 3 {
+                    let newpath = Bundle.main.path(forResource: "attack", ofType: "wav")!
+                    let atkURL = URL(fileURLWithPath: newpath)
+                    do {
+                        ATKplayer = try AVAudioPlayer(contentsOf: atkURL)
+                        ATKplayer.prepareToPlay()
+                        ATKplayer.play()
+                    } catch let error as NSError {
+                        print(error.description)
+                    }
                     monster?.removeAllActions()
                     Animations.monsterAttack(sceneView: sceneView, node: monster!, score: currentScore, view: self)
                     monster_timer!.invalidate()
