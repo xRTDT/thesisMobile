@@ -11,6 +11,8 @@ import SceneKit
 import ARKit
 import Firebase
 
+var highScoreVal: Int = 0;
+
 class Init {
     
     class func initMarkers(scene: SCNScene) -> Array<SCNNode> {
@@ -99,14 +101,15 @@ class Init {
         return currentScore
     }
     
-    class func toDeathScreen(finalScore: Int) {
+    class func toDeathScreen(finalScore: Int, view: UIViewController) {
         let usersDB = FIRDatabase.database().reference().child("Users")
         let userID = FIRAuth.auth()?.currentUser?.uid
         usersDB.child(userID!).child("HighScore").observe(FIRDataEventType.value, with: {(snapshot) in
-            let highScoreVal = snapshot.value as! Int
+            highScoreVal = snapshot.value as! Int
             print("final score is \(finalScore)")
             print("highScoreVal is \(highScoreVal)")
             if finalScore > highScoreVal {
+                highScoreVal = finalScore
                 usersDB.child(userID!).child("HighScore").setValue(finalScore) {
                     (error, ref) in
                     if error != nil {
@@ -116,6 +119,7 @@ class Init {
                     }
                 }
             }
+            view.performSegue(withIdentifier: "toDeath", sender: view)
         })
     }
 }
