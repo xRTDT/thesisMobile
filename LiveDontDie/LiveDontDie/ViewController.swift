@@ -13,9 +13,10 @@ import ARKit
 import Mapbox
 import AVFoundation
 
+var currentScore: Int = 0
+
 class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     
-    var currentScore: Int = 0
     var compass : MBXCompassMapView!
     var progress: Int = 0
     var markers: Array<SCNNode>?

@@ -8,10 +8,15 @@
 import UIKit
 
 class DeathViewController: UIViewController {
-
+    var previousViewController: ViewController!
+    @IBOutlet weak var score: UILabel!
+    @IBOutlet weak var highScore: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        score.text = "score: \(currentScore)"
+        highScore.text = "highScore: \(highScoreVal)"
+        
         // Do any additional setup after loading the view.
         //
     }

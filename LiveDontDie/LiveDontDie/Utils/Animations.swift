@@ -68,8 +68,7 @@ class Animations {
         node.position = sceneView.pointOfView!.position
         SCNTransaction.completionBlock = {
             print("monster Attack is triggering to death screen")
-            Init.toDeathScreen(finalScore: score)
-            view.performSegue(withIdentifier: "toDeath", sender: view)
+            Init.toDeathScreen(finalScore: score, view: view)
         }
         SCNTransaction.commit()
     }
