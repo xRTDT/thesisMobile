@@ -36,9 +36,15 @@ class Init {
     }
     
     class func initMonster() -> SCNNode {
-        let obj = SCNScene(named: "../art.scnassets/scarygirl.scn")
-        let monster = obj?.rootNode.childNode(withName: "scarygirl", recursively: true)!
+        let obj = SCNScene(named: "../art.scnassets/resizedMonster.scn")
+        let monster = obj?.rootNode.childNode(withName: "creepygirl1", recursively: true)!
         monster?.name = "Monster"
+        monster?.opacity = 0.0
+        monster?.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        for node in (monster?.childNodes)! {
+            print(node)
+            node.scale = SCNVector3Make(0.1, 0.1,0.1)
+        }
         return monster!
     }
     
@@ -50,9 +56,7 @@ class Init {
         let angle = Float.pi * Float(drand48() * 2)
         let positionx = current.x + (range * sin(angle))
         let positionz = current.z + (range * cos(angle))
-        monster.position = SCNVector3Make(positionx, current.y - 2, positionz)
-        monster.scale = SCNVector3Make(0.1, 0.1, 0.1)
-        monster.opacity = 0.0
+        monster.position = SCNVector3Make(positionx, current.y - 1.618, positionz)
         sceneView.scene.rootNode.addChildNode(monster)
 
         // Forces monster to be facing you at all times
