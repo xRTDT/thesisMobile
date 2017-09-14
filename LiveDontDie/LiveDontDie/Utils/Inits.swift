@@ -127,5 +127,6 @@ class Init {
             view.performSegue(withIdentifier: "toDeath", sender: view)
         })
     }
+
 }
 
