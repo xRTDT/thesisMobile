@@ -18,15 +18,14 @@ class Init {
     class func initMarkers(scene: SCNScene) -> Array<SCNNode> {
         var markers: Array<SCNNode> = []
         for index in 1...8 {
-            //change range to make playing area bigger/smaller
-            let range = 200.0
+            let range = 75.0
             let node = SCNNode()
             let cube = SCNBox(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0)
             let material = SCNMaterial()
             material.diffuse.contents = UIColor.red
             cube.materials = [material]
             node.geometry = cube
-            node.opacity = 0.99
+            node.opacity = 0
             let xPos = Float((drand48() - 0.5) * range)
             let zPos = Float((drand48() - 0.5) * range)
             node.name = "Marker" + String(describing: index)
@@ -52,7 +51,6 @@ class Init {
     
     class func renderMonster(sceneView: ARSCNView, range: Float, monster: SCNNode) {
         let current = sceneView.pointOfView!.position
-        //monster is positioned to render 360 degrees around player at radius
         let time = UInt32(NSDate().timeIntervalSinceReferenceDate)
         srand48(Int(time))
         let angle = Float.pi * Float(drand48() * 2)
@@ -60,8 +58,6 @@ class Init {
         let positionz = current.z + (range * cos(angle))
         monster.position = SCNVector3Make(positionx, current.y - 1.618, positionz)
         sceneView.scene.rootNode.addChildNode(monster)
-
-        // Forces monster to be facing you at all times
         let target = SCNBillboardConstraint()
         monster.constraints = [target]
     }
@@ -76,19 +72,28 @@ class Init {
         return distance
                 }
     
-    class func renderNote(sceneView: ARSCNView, node: SCNNode) {
+    class func calculateDistanceFromStart(sceneView: ARSCNView) -> Float {
+        let current = sceneView.pointOfView!.position
+        let distance = sqrt(
+            pow(current.x, 2) +
+                pow(current.z, 2)
+        )
+        return distance
+    }
+    
+    class func renderNote(sceneView: ARSCNView, node: SCNNode, label: UILabel) {
             node.removeFromParentNode()
             let current = sceneView.pointOfView!.position
             let name = "noteFor" + node.name!
             if sceneView.scene.rootNode.childNode(withName: name, recursively: true) == nil {
-                let obj = SCNScene(named: "../art.scnassets/ship.scn")
-                let note = obj?.rootNode.childNode(withName: "ship", recursively: true)!
-                note?.scale = SCNVector3Make(1, 1, 1)
+                let obj = SCNScene(named: "../art.scnassets/resizedKey2.scn")
+                let note = obj?.rootNode.childNode(withName: "Key_01", recursively: true)!
                 note?.name = name
-                note?.position = SCNVector3Make(current.x, current.y-2, current.z)
+                note?.position = SCNVector3Make(current.x, current.y-1.5, current.z)
                 note?.opacity = 0
                 sceneView.scene.rootNode.addChildNode(note!)
                 Animations.fadeIn(node: note!)
+                Animations.displayNotification(message: "A key has appeared.", label: label)
             }
     }
     

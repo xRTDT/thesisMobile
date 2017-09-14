@@ -13,7 +13,7 @@ import ARKit
 class Animations {
     class func displayNotification(message: String, label: UILabel) {
         label.text = message
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseOut, animations: {
             label.alpha = 1.0
         }, completion: {
             (finished: Bool) -> Void in
@@ -26,14 +26,10 @@ class Animations {
     class func grab(node: SCNNode, sceneView: ARSCNView) {
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.5
-        if node.opacity == 1 {
-            node.parent?.position = sceneView.pointOfView!.position
-        } else {
             node.position = sceneView.pointOfView!.position
-        }
-        SCNTransaction.completionBlock = {
-            node.removeFromParentNode()
-        }
+            SCNTransaction.completionBlock = {
+                node.opacity = 0.0
+            }
         SCNTransaction.commit()
     }
     
@@ -54,8 +50,8 @@ class Animations {
     class func moveMonster(sceneView: ARSCNView, node: SCNNode) {
         let currentPosition = sceneView.pointOfView!.position
         let theta = atan2(currentPosition.z - node.position.z, currentPosition.x - node.position.x)
-        let newX = node.position.x + (1/60 * cos(theta))
-        let newZ = node.position.z + (1/60 * sin(theta))
+        let newX = node.position.x + (0.5/60 * cos(theta))
+        let newZ = node.position.z + (0.5/60 * sin(theta))
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 1/60
         node.position = SCNVector3Make(newX, node.position.y, newZ)
@@ -64,10 +60,10 @@ class Animations {
     
     class func monsterAttack(sceneView: ARSCNView, node: SCNNode, score: Int, view: UIViewController) {
         SCNTransaction.begin()
-        SCNTransaction.animationDuration = 0.1
-        node.position = sceneView.pointOfView!.position
+        SCNTransaction.animationDuration = 0.3
+        let current = sceneView.pointOfView!.position
+        node.position = SCNVector3Make(current.x, current.y - 1.5, current.z)
         SCNTransaction.completionBlock = {
-            print("monster Attack is triggering to death screen")
             Init.toDeathScreen(finalScore: score, view: view)
         }
         SCNTransaction.commit()

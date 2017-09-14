@@ -21,7 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     var progress: Int = 0
     var markers: Array<SCNNode>?
     var monster: SCNNode?
-    var monsterRange: Float = 50
+    var monsterRange: Float = 30
     var BGMplayer: AVAudioPlayer!
     var monsterPlayer: AVAudioPlayer!
     var SFXplayer: AVAudioPlayer!
@@ -31,7 +31,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     var alive: Bool = true
     var monster_timer: Timer? = nil
     var frame_timer: Timer? = nil
-    
+    var monsterInterval: Double = 141
+    var tooFar: Bool = false
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var progressLabel: UILabel!
     
@@ -41,9 +42,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         sceneView.delegate = self
         let scene = SCNScene(named: "art.scnassets/main.scn")!
         sceneView.scene = scene
-        
+        Animations.displayNotification(message: "Find 8 keys to survive.", label: progressLabel)
+        //re-initalizing game on restart
+        monsterInterval = 141
+        monsterRange = 20
+        monsterGotWithinrange = false
+        isCloseToNote = false
+        alive = true
+        progress = 0
         markers = Init.initMarkers(scene: scene)
         monster = Init.initMonster()
+        currentScore = 0
+        
         
         compass = MBXCompassMapView.initCompass(view: view)
         compass.delegate = self
@@ -71,7 +81,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         }
         
         func monsterTimer(){
-            monster_timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
+            monster_timer = Timer.scheduledTimer(timeInterval: self.monsterInterval, target: self, selector: #selector(self.monsterTimer), userInfo: nil, repeats: true)
         }
         
         frameTimer()
@@ -84,11 +94,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         
         if hitResults.count > 0 {
             let node = hitResults[0].node
-            if node.opacity == 1 {
-                progress = progress + 1
+            if node.opacity == 1 && node.name?.range(of: "noteFor") != nil {
+                print(node.name!)
                 let message = String(progress) + " of 8 notes collected."
                 Animations.displayNotification(message: message, label: progressLabel)
                 Animations.grab(node: node, sceneView: sceneView)
+                progress = progress + 1
+                monsterInterval = monsterInterval - 20
+                
+                if progress == 1 {
+                    Init.toDeathScreen(finalScore: currentScore, view: self)
+                }
+                
+                isCloseToNote = false
                 let path = Bundle.main.path(forResource: "pickup", ofType: "wav")!
                 let sfxURL = URL(fileURLWithPath: path)
                 do {
@@ -103,16 +121,36 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     }
     
     @objc func FrameTimer(){
-        var closestNote: Float? = 999999
-        print(currentScore)
+        var closestNoteDistance: Float? = 999999
+        var closestNote: SCNNode? = nil
+        let distanceFromCenter = Init.calculateDistanceFromStart(sceneView: sceneView)
+        print(distanceFromCenter)
+        print(sceneView.pointOfView!.position)
+        if distanceFromCenter > 37.5 && !tooFar {
+            tooFar = true
+            self.progressLabel.text = "You are off the map."
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+                self.progressLabel.alpha = 1.0
+            })
+        }
+        
+        if distanceFromCenter < 37.5 && tooFar {
+            tooFar = false
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+                self.progressLabel.alpha = 0.0
+            })
+        }
+        
+        
         for node in markers! {
             let markerDistance = Init.calculateDistance(sceneView: sceneView, node: node)
-            if markerDistance < closestNote! || closestNote == nil {
-                closestNote = markerDistance
+            if markerDistance < closestNoteDistance! || closestNoteDistance == nil {
+                closestNoteDistance = markerDistance
+                closestNote = node
             }
         }
         
-        if closestNote! < 15 && !isCloseToNote {
+        if closestNoteDistance! < 5 && !isCloseToNote {
             isCloseToNote = true
             self.progressLabel.text = "You are close to a key"
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
@@ -120,16 +158,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             })
         }
         
-        if closestNote! < 5 {
-            UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+        if closestNoteDistance! < 3  && isCloseToNote {
+            UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseOut, animations: {
                 self.progressLabel.alpha = 0.0
             }, completion: {
                 (finished: Bool) -> Void in
-                Animations.displayNotification(message: "A key has appeared", label: self.progressLabel)
+                Init.renderNote(sceneView: self.sceneView, node: closestNote!, label: self.progressLabel)
             })
         }
         
-        if closestNote! > 15 && isCloseToNote {
+        if closestNoteDistance! > 15 && isCloseToNote {
+            isCloseToNote = false
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
                 self.progressLabel.alpha = 0.0
             })
@@ -141,10 +180,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             if(sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) != nil){
                 let monsterDistance = Init.calculateDistance(sceneView: sceneView, node: monster!)
                 //fade out monster at large distances
-                if monsterDistance > 45 && monster!.opacity == 1 {
+                if monsterDistance > 20 && monster!.opacity == 1 {
                     Animations.fadeOut(node: monster!)
                     SFXplayer.stop()
-                } else if monsterDistance < 30 && monster!.opacity == 0 {
+                } else if monsterDistance < 15 && monster!.opacity == 0 {
                     monsterGotWithinrange = true
                     Animations.fadeIn(node: monster!)
                     let path = Bundle.main.path(forResource: "monsterClose", ofType: "wav")!
@@ -161,7 +200,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 }
                 
 
-                if monsterDistance > 50 && monsterGotWithinrange {
+                if monsterDistance > 25 && monsterGotWithinrange {
                     monster?.removeFromParentNode()
                     monsterGotWithinrange = false
                 }
@@ -170,6 +209,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                     let newpath = Bundle.main.path(forResource: "attack", ofType: "wav")!
                     let atkURL = URL(fileURLWithPath: newpath)
                     do {
+                        monsterPlayer!.stop()
                         ATKplayer = try AVAudioPlayer(contentsOf: atkURL)
                         ATKplayer.prepareToPlay()
                         ATKplayer.play()
