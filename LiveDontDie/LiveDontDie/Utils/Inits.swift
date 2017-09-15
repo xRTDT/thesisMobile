@@ -18,7 +18,7 @@ class Init {
     class func initMarkers(scene: SCNScene) -> Array<SCNNode> {
         var markers: Array<SCNNode> = []
         for index in 1...8 {
-            let range = 100
+            let range = 100.0
             let node = SCNNode()
             let cube = SCNBox(width: 0.5, height: 0.5, length: 0.5, chamferRadius: 0)
             let material = SCNMaterial()
