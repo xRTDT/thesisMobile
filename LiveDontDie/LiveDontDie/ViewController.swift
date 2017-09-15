@@ -43,6 +43,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         let scene = SCNScene(named: "art.scnassets/main.scn")!
         sceneView.scene = scene
         Animations.displayNotification(message: "Find 8 keys to survive.", label: progressLabel)
+        
+        
         //re-initalizing game on restart
         monsterInterval = 141
         monsterRange = 20
@@ -126,7 +128,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         let distanceFromCenter = Init.calculateDistanceFromStart(sceneView: sceneView)
         print(distanceFromCenter)
         print(sceneView.pointOfView!.position)
-        if distanceFromCenter > 37.5 && !tooFar {
+        if distanceFromCenter > 50 && !tooFar {
             tooFar = true
             self.progressLabel.text = "You are off the map."
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
@@ -134,7 +136,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             })
         }
         
-        if distanceFromCenter < 37.5 && tooFar {
+        if distanceFromCenter < 50 && tooFar {
             tooFar = false
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
                 self.progressLabel.alpha = 0.0
@@ -143,10 +145,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         
         
         for node in markers! {
-            let markerDistance = Init.calculateDistance(sceneView: sceneView, node: node)
-            if markerDistance < closestNoteDistance! || closestNoteDistance == nil {
-                closestNoteDistance = markerDistance
-                closestNote = node
+            if sceneView.scene.rootNode.childNode(withName: node.name!, recursively: true) != nil {
+                let markerDistance = Init.calculateDistance(sceneView: sceneView, node: node)
+                if markerDistance < closestNoteDistance! || closestNoteDistance == nil {
+                    closestNoteDistance = markerDistance
+                    closestNote = node
+                }
             }
         }
         
