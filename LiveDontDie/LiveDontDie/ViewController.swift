@@ -46,7 +46,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         
         
         //re-initalizing game on restart
-        monsterInterval = 141
+        monsterInterval = 161
         monsterRange = 20
         monsterGotWithinrange = false
         isCloseToNote = false
@@ -98,13 +98,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             let node = hitResults[0].node
             if node.opacity == 1 && node.name?.range(of: "noteFor") != nil {
                 print(node.name!)
-                let message = String(progress) + " of 8 notes collected."
+                progress = progress + 1
+                let message = String(progress) + " of 8 keys collected."
                 Animations.displayNotification(message: message, label: progressLabel)
                 Animations.grab(node: node, sceneView: sceneView)
-                progress = progress + 1
                 monsterInterval = monsterInterval - 20
                 
-                if progress == 1 {
+                if progress == 8 {
                     Init.toDeathScreen(finalScore: currentScore, view: self)
                 }
                 
@@ -126,8 +126,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
         var closestNoteDistance: Float? = 999999
         var closestNote: SCNNode? = nil
         let distanceFromCenter = Init.calculateDistanceFromStart(sceneView: sceneView)
-        print(distanceFromCenter)
-        print(sceneView.pointOfView!.position)
         if distanceFromCenter > 50 && !tooFar {
             tooFar = true
             self.progressLabel.text = "You are off the map."
@@ -154,7 +152,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             }
         }
         
-        if closestNoteDistance! < 5 && !isCloseToNote {
+        if closestNoteDistance! < 10 && !isCloseToNote {
             isCloseToNote = true
             self.progressLabel.text = "You are close to a key"
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
@@ -162,7 +160,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             })
         }
         
-        if closestNoteDistance! < 3  && isCloseToNote {
+        if closestNoteDistance! < 5  && isCloseToNote {
             UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseOut, animations: {
                 self.progressLabel.alpha = 0.0
             }, completion: {
@@ -171,7 +169,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
             })
         }
         
-        if closestNoteDistance! > 15 && isCloseToNote {
+        if closestNoteDistance! > 10 && isCloseToNote {
             isCloseToNote = false
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
                 self.progressLabel.alpha = 0.0
@@ -186,7 +184,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
                 //fade out monster at large distances
                 if monsterDistance > 20 && monster!.opacity == 1 {
                     Animations.fadeOut(node: monster!)
-                    SFXplayer.stop()
+                    monsterPlayer.stop()
                 } else if monsterDistance < 15 && monster!.opacity == 0 {
                     monsterGotWithinrange = true
                     Animations.fadeIn(node: monster!)
@@ -233,7 +231,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, MGLMapViewDelegate {
     }
     
     @objc func monsterTimer(){
-        monsterRange = monsterRange - 1
+        monsterRange = monsterRange - 0.5
         if monster == nil || sceneView.scene.rootNode.childNode(withName: monster!.name!, recursively: true) == nil {
             Init.renderMonster(sceneView: sceneView, range: monsterRange, monster: monster!)
         }
