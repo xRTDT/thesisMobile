@@ -17,7 +17,7 @@ class Animations {
             label.alpha = 1.0
         }, completion: {
             (finished: Bool) -> Void in
-            UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
+            UIView.animate(withDuration: 1.0, delay: 1, options: .curveEaseIn, animations: {
                 label.alpha = 0.0
             })
         })
